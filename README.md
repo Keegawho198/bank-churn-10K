@@ -2,6 +2,8 @@
 Understanding Customer Retention: Churn Prediction with MySQL &amp; Tableau
 
 
+Data set Kaggle link:
+https://www.kaggle.com/datasets/radheshyamkollipara/bank-customer-churn/data
 
 
 
@@ -57,6 +59,13 @@ Resource Learning links
 
 Dealing with duplicates:
 https://saturncloud.io/blog/how-to-find-all-duplicate-rows-in-a-pandas-dataframe/#:~:text=To%20find%20duplicate%20rows%20in%20a%20pandas%20dataframe%2C%20we%20can,get%20all%20the%20duplicate%20rows.
+
+Using env file:
+https://www.geeksforgeeks.org/how-to-create-and-use-env-files-in-python/
+
+https://dev.to/jakewitcher/using-env-files-for-environment-variables-in-python-applications-55a1
+
+
 
 
 
