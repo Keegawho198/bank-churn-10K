@@ -35,7 +35,6 @@ GROUP BY Exited;
 
 
 -- Do customers with higher balances churn less?
--- 🔹 AVG(Balance) for Exited = 0 vs. Exited = 1.
 SELECT ROUND(AVG(balance),2) AS avg_bal, Exited
 FROM customers
 GROUP BY Exited;
@@ -54,39 +53,79 @@ ORDER BY NumOfProducts;
 
 
 -- Are active members less likely to churn?
--- 🔹 Compare IsActiveMember = 1 vs. IsActiveMember = 0 for Exited.
 SELECT IsActiveMember, Exited, COUNT(*) AS total_Customer
 FROM customers
 GROUP BY IsActiveMember, Exited
 ORDER BY IsActiveMember;
 
 -- Do dissatisfied customers churn more?
--- 🔹 Find churn rate for different SatisfactionScore levels using GROUP BY.
-SELECT COUNT(exited), SatisfactionScore, exited
+SELECT COUNT(exited) AS customers, SatisfactionScore, exited
 FROM customers
-GROUP BY SatisfactionScore, exited;
+GROUP BY SatisfactionScore, exited
+ORDER BY SatisfactionScore;
 
 
 
 -- Do customers who file complaints churn more often?
--- 🔹 Compare Complain = 1 vs. Complain = 0 for Exited.
+SELECT COUNT(exited) AS customers, Complain, exited
+FROM customers
+GROUP BY Complain, exited
+ORDER BY Complain;
 
--- Which group of customers (age, geography, balance) is most likely to churn?
--- 🔹 Use GROUP BY with multiple columns (Geography, Age, Balance).
+-- Which group of customers (age, geography, balance) is most likely to churn? (USE CASE FOR Balance and age)
+-- USE CTE
+
+WITH CustomerGroups AS (
+SELECT geography,
+		CASE 
+			WHEN age BETWEEN 0 AND 21 THEN 'Young adult'
+            WHEN age BETWEEN 22 AND 39 THEN 'Adult'
+            WHEN age BETWEEN 40 AND 59 THEN 'Middle Aged Adult'
+            ELSE 'Senior'
+		END AS AgeCategory,
+		CASE 
+			WHEN balance = 0 THEN 'No Balance'
+            WHEN balance BETWEEN 1 AND 20000 THEN 'Low Balance'
+            WHEN balance BETWEEN  20001 AND 60000 THEN 'Medium Balance'
+            WHEN balance BETWEEN 60001 and 120000 THEN 'High Balance'
+            ELSE 'Very High Balance'
+		END AS BalanceCategory,
+            exited
+FROM customers
+)
+
+SELECT Geography, AgeCategory, BalanceCategory, 
+       ROUND(AVG(CASE WHEN Exited = 'Yes' THEN 1 ELSE 0 END) * 100, 2) AS ChurnRate
+FROM CustomerGroups
+GROUP BY Geography, AgeCategory, BalanceCategory;
+
+-- can also use COUNT(CASE WHEN Exited = 'Yes' THEN 1 END) / COUNT(*) * 100
+
 
 -- What is the churn rate per country?
--- 🔹 COUNT() of total customers vs. churned customers per country.
+SELECT Geography, COUNT(*) AS CustomerCount,
+       ROUND(AVG(CASE WHEN Exited = 'Yes' THEN 1 ELSE 0 END) * 100, 2) AS ChurnRate
+FROM customers
+GROUP BY Geography;
 
 
 -- How much estimated salary is lost due to churn?
--- 🔹 SUM(EstimatedSalary) for Exited = 1.
+SELECT ROUND(SUM(EstimatedSalary),2) AS Total_Lost
+FROM customers
+WHERE Exited = 'yes';
 
 -- What is the average salary of churned vs. retained customers?
--- 🔹 AVG(EstimatedSalary), grouping by Exited.
-
+SELECT ROUND(AVG(EstimatedSalary),2) AS AVG_Estimated_Sal, exited
+FROM customers
+GROUP BY exited;
 
 -- Find customers at highest risk of churning (multiple risk factors).
--- 🔹 Look for CreditScore < X, Balance = 0, SatisfactionScore < X, etc.
+SELECT *
+FROM Customers
+WHERE CreditScore < 700
+  AND Balance = 0
+  AND SatisfactionScore < 4
+  AND Exited = 'no';  -- Assuming 'Exited' indicates if the customer has churned (0 = no, 1 = yes)
 
 -- Which Card Type has the highest retention rate?
 -- 🔹 GROUP BY CardType, then compare Exited percentages.
