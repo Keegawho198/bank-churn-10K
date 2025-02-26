@@ -124,8 +124,12 @@ SELECT *
 FROM Customers
 WHERE CreditScore < 700
   AND Balance = 0
-  AND SatisfactionScore < 4
-  AND Exited = 'no';  -- Assuming 'Exited' indicates if the customer has churned (0 = no, 1 = yes)
+  AND SatisfactionScore < 3
+  AND Exited = 'no';  
 
 -- Which Card Type has the highest retention rate?
--- 🔹 GROUP BY CardType, then compare Exited percentages.
+SELECT CardType, ROUND(COUNT(CASE WHEN Exited = 'No' THEN 1 END) * 100/ COUNT(*),2) AS RetentionRate
+FROM customers
+GROUP BY CardType
+ORDER BY RetentionRate;
+
