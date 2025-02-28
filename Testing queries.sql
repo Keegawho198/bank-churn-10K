@@ -5,6 +5,10 @@ USE customerchurn;
 SELECT *
 FROM customers;
 
+SELECT COUNT(Exited)
+FROM customers
+WHERE Exited = 'Yes';
+
 SELECT tenure
 FROM customers
 ORDER BY tenure DESC
@@ -14,6 +18,17 @@ SELECT Exited, Complain
 FROM customers
 WHERE Complain = "YES" AND Exited = "Yes";
 
+SELECT COUNT(*)
+FROM customers
+WHERE Complain = "yES" AND Exited = "YES";
+
+SELECT AVG(Balance)
+FROM customers
+WHERE age < 20;
+
+SELECT *
+FROM customers
+WHERE balance < 10000;
 
 SELECT COUNT(Exited), Exited, NumOfProducts
 FROM customers
