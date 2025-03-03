@@ -58,13 +58,6 @@ CardType — The type of card the customer holds
 PointsEarned — Rewards points accumulated through credit card usage
 
 
-### Project Overview
-This project aims to analyze customer churn using:
-- **Python** for data cleaning and preprocessing
-- **MySQL** for storing and querying data
-- **Tableau** for data visualization and insights
-
-Churn prevention is crucial as retaining existing customers is more cost-effective than acquiring new ones. By analyzing the factors influencing churn, banks can create retention strategies to improve customer loyalty.
 
 ## Data Cleaning & Preprocessing
 ### Binary Value Conversion
