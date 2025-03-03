@@ -4,6 +4,8 @@
 
 ## Understanding Customer Retention: Churn Prediction with MySQL & Tableau
 
+![Main Dashboard](Resources/screenshots/Main%20Dashboard.png)
+
 ### Project Overview
 This project aims to analyze customer churn using:
 - **Python** for data cleaning and preprocessing
@@ -148,5 +150,4 @@ DB_PASSWORD=   # Replace with your actual password
 DB_NAME=CustomerChurn
 ```
 
-This README provides an overview of the project, key insights, and recommendations for further improvement. 🚀
 
