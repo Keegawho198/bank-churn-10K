@@ -1,69 +1,151 @@
-# bank-churn-10K
-Understanding Customer Retention: Churn Prediction with MySQL &amp; Tableau
+# Bank Churn Analysis
+
+-- Keegan Nair
+
+## Understanding Customer Retention: Churn Prediction with MySQL & Tableau
+
+### Dataset Information
+- **Source:** Kaggle
+- **Dataset Link:** [Bank Customer Churn](https://www.kaggle.com/datasets/radheshyamkollipara/bank-customer-churn/data)
+- **Description:** This dataset contains information about 10,000 bank customers, including demographics, account details, and whether they have churned.
+
+## Column Descriptions
+
+### Features in the Dataset:
+
+RowNumber — Row index (not relevant to analysis)
+
+CustomerId — Unique identifier for each customer
+
+Surname — Customer's last name (not a determining factor in churn)
+
+CreditScore — Higher scores indicate financial reliability, potentially lowering churn risk
+
+Geography — The customer's country, which may influence churn trends
+
+Gender — Helps analyze if gender affects churn rates
+
+Age — Older customers are generally more loyal than younger ones
+
+Tenure — Number of years the customer has been with the bank
+
+Balance — Customers with higher balances are less likely to churn
+
+NumOfProducts — The number of products the customer has with the bank
+
+HasCrCard — Whether the customer has a credit card ('Yes'/'No')
+
+IsActiveMember — Whether the customer is actively engaged ('Yes'/'No')
+
+EstimatedSalary — Income level, which can correlate with churn probability
+
+Exited — Indicates whether the customer has churned ('Yes'/'No')
+
+Complain — Whether the customer has filed a complaint ('Yes'/'No')
+
+SatisfactionScore — Customer's rating of their satisfaction
+
+CardType — The type of card the customer holds
+
+PointsEarned — Rewards points accumulated through credit card usage
 
 
+### Project Overview
+This project aims to analyze customer churn using:
+- **Python** for data cleaning and preprocessing
+- **MySQL** for storing and querying data
+- **Tableau** for data visualization and insights
 
+Churn prevention is crucial as retaining existing customers is more cost-effective than acquiring new ones. By analyzing the factors influencing churn, banks can create retention strategies to improve customer loyalty.
 
+## Data Cleaning & Preprocessing
+### Binary Value Conversion
+The dataset does not explicitly state the meaning of `0` and `1` values. Through analysis, the following assumptions were made:
+- `1` → Yes/True/Positive
+- `0` → No/False/Negative
 
--- For 0 and 1 values
+#### Column Interpretation:
+- **HasCrCard**: 1 = Has a credit card, 0 = Does not have a credit card
+- **IsActiveMember**: 1 = Active customer, 0 = Inactive customer
+- **Exited**: 1 = Customer churned, 0 = Customer stayed
+- **Complain**: 1 = Customer filed a complaint, 0 = No complaint
 
-The dataset itself doesn’t explicitly tell us that 1 = Yes and 0 = No. However, by going through the data, I found that:
+### Steps Taken:
+1. Checked for missing values (none found)
+2. Checked for duplicate rows (none found)
+3. Converted binary values to `Yes/No`
+4. Dropped the `RowNumber` column as it has no analytical value
+5. Saved the cleaned dataset as `cleaned_customer_churn.csv`
 
-1 → Positive/True/Yes 0 → Negative/False/No
+## Database Setup & SQL Queries
+### MySQL Integration
+1. **Created a MySQL Database:**
+   ```sql
+   CREATE DATABASE CustomerChurn;
+   ```
+2. **Created a Table:**
+   ```sql
+   CREATE TABLE Customers (
+       CustomerId INT PRIMARY KEY,
+       Surname VARCHAR(50),
+       CreditScore INT,
+       Geography VARCHAR(50),
+       Gender VARCHAR(10),
+       Age INT,
+       Tenure INT,
+       Balance FLOAT,
+       NumOfProducts INT,
+       HasCrCard VARCHAR(3),
+       IsActiveMember VARCHAR(3),
+       EstimatedSalary FLOAT,
+       Exited VARCHAR(3),
+       Complain VARCHAR(3),
+       SatisfactionScore INT,
+       CardType VARCHAR(50),
+       PointEarned INT
+   );
+   ```
+3. **Loaded Data into MySQL** using Python (`pymysql`)
+4. **Executed Exploratory SQL Queries** to analyze trends
 
-Context Clues from Column Names:
+## Tableau Dashboard & Insights
+### Key Findings:
+1. **Overall Churn Rate**
+   - 2,038 customers exited (around 20% churn rate)
+   - Majority churn occurred in the **40-50 age group**
+   
+2. **Gender-Based Analysis**
+   - Slightly more female customers churned than males
+   
+3. **Geographic Influence**
+   - France & Germany had a churn rate **double that of Spain**
 
-HasCrCard: The name suggests it indicates whether a customer has a credit card. It makes sense that 1 would mean Yes (has card) and 0 would mean No (doesn't have card).
+4. **Product Holding & Churn**
+   - Customers with **only one product** had the highest churn rate
+   
+5. **Customer Complaints**
+   - **90% of customers who filed complaints churned**
+   
+6. **Credit Score Impact**
+   - **600-700 credit score range** had the highest churn
 
-IsActiveMember: This sounds like a flag for customer activity. 1 being active (Yes) and 0 being inactive (No) aligns with typical patterns.
+## Recommendations & Next Steps
+- **Retention Strategy**: Focus on **40-50 age group** and customers with **one product**
+- **Customer Engagement**: Address complaints promptly to reduce churn
+- **Geographic Targeting**: Special campaigns for France & Germany
+- **Credit Score Consideration**: Identify at-risk customers with moderate credit scores
 
-Exited: In churn analysis, 1 usually means the customer churned (Yes), and 0 means they stayed (No).
+## Learning Resources
+- **Handling Duplicates in Pandas:** [Saturn Cloud](https://saturncloud.io/blog/how-to-find-all-duplicate-rows-in-a-pandas-dataframe/)
+- **Using `.env` Files in Python:** [GeeksforGeeks](https://www.geeksforgeeks.org/how-to-create-and-use-env-files-in-python/), [Dev.to](https://dev.to/jakewitcher/using-env-files-for-environment-variables-in-python-applications-55a1)
 
-Complain: If a customer made a complaint, 1 for Yes and 0 for No is a common representation.
-
-
-
-Notes; As we know, it is much more expensive to sign in a new client than keeping an existing one.
-
-It is advantageous for banks to know what leads a client towards the decision to leave the company.
-
-Churn prevention allows companies to develop loyalty programs and retention campaigns to keep as many customers as possible.
-
-
-About Dataset
-RowNumber—corresponds to the record (row) number and has no effect on the output.
-CustomerId—contains random values and has no effect on customer leaving the bank.
-Surname—the surname of a customer has no impact on their decision to leave the bank.
-CreditScore—can have an effect on customer churn, since a customer with a higher credit score is less likely to leave the bank.
-Geography—a customer’s location can affect their decision to leave the bank.
-Gender—it’s interesting to explore whether gender plays a role in a customer leaving the bank.
-Age—this is certainly relevant, since older customers are less likely to leave their bank than younger ones.
-Tenure—refers to the number of years that the customer has been a client of the bank. Normally, older clients are more loyal and less likely to leave a bank.
-Balance—also a very good indicator of customer churn, as people with a higher balance in their accounts are less likely to leave the bank compared to those with lower balances.
-NumOfProducts—refers to the number of products that a customer has purchased through the bank.
-HasCrCard—denotes whether or not a customer has a credit card. This column is also relevant, since people with a credit card are less likely to leave the bank.
-IsActiveMember—active customers are less likely to leave the bank.
-EstimatedSalary—as with balance, people with lower salaries are more likely to leave the bank compared to those with higher salaries.
-Exited—whether or not the customer left the bank.
-Complain—customer has complaint or not.
-Satisfaction Score—Score provided by the customer for their complaint resolution.
-Card Type—type of card hold by the customer.
-Points Earned—the points earned by the customer for using credit card.
-
-
-
-
-Resource Learning links
-
-Dealing with duplicates:
-https://saturncloud.io/blog/how-to-find-all-duplicate-rows-in-a-pandas-dataframe/#:~:text=To%20find%20duplicate%20rows%20in%20a%20pandas%20dataframe%2C%20we%20can,get%20all%20the%20duplicate%20rows.
-
-
-
-.ENV file
-
+## Environment Variables (`.env`)
+```
 DB_HOST=localhost
 DB_USER=root
 DB_PASSWORD=   # Replace with your actual password
 DB_NAME=CustomerChurn
+```
+
+This README provides an overview of the project, key insights, and recommendations for further improvement. 🚀
 
