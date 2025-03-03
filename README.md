@@ -4,6 +4,14 @@
 
 ## Understanding Customer Retention: Churn Prediction with MySQL & Tableau
 
+### Project Overview
+This project aims to analyze customer churn using:
+- **Python** for data cleaning and preprocessing
+- **MySQL** for storing and querying data
+- **Tableau** for data visualization and insights
+
+Churn prevention is crucial as retaining existing customers is more cost-effective than acquiring new ones. By analyzing the factors influencing churn, banks can create retention strategies to improve customer loyalty.
+
 ### Dataset Information
 - **Source:** Kaggle
 - **Dataset Link:** [Bank Customer Churn](https://www.kaggle.com/datasets/radheshyamkollipara/bank-customer-churn/data)
