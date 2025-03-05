@@ -9,6 +9,25 @@ SELECT COUNT(Exited)
 FROM customers
 WHERE Exited = 'Yes';
 
+-- Customer Distribution
+-- How many customers from each country, with churn rate and total churned
+SELECT
+    Geography,
+    COUNT(*) AS Total_customers,
+    COUNT(CASE WHEN Exited = 'Yes' THEN 1 ELSE NULL END) AS churned_customers,
+    ROUND(AVG(CASE WHEN Exited = 'Yes' THEN 1 ELSE 0 END) * 100, 2) AS ChurnRate
+FROM customers
+GROUP BY Geography
+UNION ALL
+SELECT
+    'Total' AS Geography,
+    COUNT(*) AS Total_customers,
+    COUNT(CASE WHEN Exited = 'Yes' THEN 1 ELSE NULL END) AS churned_customers,
+    ROUND(AVG(CASE WHEN Exited = 'Yes' THEN 1 ELSE 0 END) * 100, 2) AS ChurnRate
+FROM customers;
+
+
+
 SELECT tenure
 FROM customers
 ORDER BY tenure DESC

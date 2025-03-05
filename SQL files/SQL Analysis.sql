@@ -5,10 +5,36 @@ SELECT *
 FROM customers;
 
 -- Customer Distribution
--- How many customers from each country
-SELECT  Geography, COUNT(*) AS Total_customers
+-- How many customers from each country, with churn rate and total churned
+SELECT  Geography, COUNT(*) AS Total_customers,
+COUNT(CASE WHEN Exited = 'Yes' THEN 1 ELSE null END) AS churned_customers,
+ROUND(AVG(CASE WHEN Exited = 'Yes' THEN 1 ELSE 0 END) * 100, 2) AS ChurnRate
 FROM customers
 GROUP BY Geography;
+
+-- adding avg and total values
+SELECT
+    Geography,
+    COUNT(*) AS Total_customers,
+    COUNT(CASE WHEN Exited = 'Yes' THEN 1 ELSE NULL END) AS churned_customers,
+    ROUND(AVG(CASE WHEN Exited = 'Yes' THEN 1 ELSE 0 END) * 100, 2) AS ChurnRate
+FROM customers
+GROUP BY Geography
+UNION ALL
+SELECT
+    'Total' AS Geography,
+    COUNT(*) AS Total_customers,
+    COUNT(CASE WHEN Exited = 'Yes' THEN 1 ELSE NULL END) AS churned_customers,
+    ROUND(AVG(CASE WHEN Exited = 'Yes' THEN 1 ELSE 0 END) * 100, 2) AS ChurnRate
+FROM customers;
+
+-- customer activity and churn
+SELECT  IsActiveMember,
+COUNT(*) AS Total_Customers,
+COUNT(CASE WHEN Exited = 'Yes' THEN 1 ELSE null END) AS churned_customers,
+ROUND(AVG(CASE WHEN Exited = 'Yes' THEN 1 ELSE 0 END) * 100, 2) AS ChurnRate
+FROM customers
+GROUP BY IsActiveMember;
 
 -- What is the gender breakdown of customers?
 SELECT  Gender, COUNT(*) AS Total_customers
@@ -133,3 +159,34 @@ FROM customers
 GROUP BY CardType
 ORDER BY RetentionRate;
 
+
+-- credit score
+-- Churn by Credit Score
+SELECT  
+    CASE 
+        WHEN CreditScore < 500 THEN 'Below 500'
+        WHEN CreditScore BETWEEN 500 AND 799 THEN '500-799'
+        ELSE '800+' 
+    END AS CreditScoreGroup,
+    COUNT(*) AS Total_Customers,
+    COUNT(CASE WHEN Exited = 'Yes' THEN 1 ELSE NULL END) AS Churned_Customers,
+    ROUND(AVG(CASE WHEN Exited = 'Yes' THEN 1 ELSE 0 END) * 100, 2) AS ChurnRate
+FROM customers
+GROUP BY CreditScoreGroup
+ORDER BY ChurnRate DESC;
+
+
+-- Churn by Balance
+SELECT  
+    CASE 
+        WHEN Balance = 0 THEN 'Balance 0'
+       -- WHEN Balance BETWEEN 10000 AND 50000 THEN 'Medium sized balance'
+        -- WHEN Balance BETWEEN 50001 AND 85000 THEN 'Large sized balance'
+        ELSE 'mid - large sized balance'
+    END AS BalanceGroup,
+    COUNT(*) AS Total_Customers,
+    COUNT(CASE WHEN Exited = 'Yes' THEN 1 ELSE NULL END) AS Churned_Customers,
+    ROUND(AVG(CASE WHEN Exited = 'Yes' THEN 1 ELSE 0 END) * 100, 2) AS ChurnRate
+FROM customers
+GROUP BY BalanceGroup
+ORDER BY ChurnRate DESC;
