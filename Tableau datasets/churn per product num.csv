@@ -1,0 +1,5 @@
+NumOfProducts,AVG(AGE),Total_customers,churned_customers,ChurnRate
+1,39.6731,5084,1409,27.71
+2,37.7536,4590,349,7.60
+3,43.1955,266,220,82.71
+4,45.6833,60,60,100.00

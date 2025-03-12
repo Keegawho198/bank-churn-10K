@@ -26,7 +26,14 @@ SELECT
     ROUND(AVG(CASE WHEN Exited = 'Yes' THEN 1 ELSE 0 END) * 100, 2) AS ChurnRate
 FROM customers;
 
-
+-- num of products churn rate
+SELECT
+    NumOfProducts, AVG(AGE),
+    COUNT(*) AS Total_customers,
+    COUNT(CASE WHEN Exited = 'Yes' THEN 1 ELSE NULL END) AS churned_customers,
+    ROUND(AVG(CASE WHEN Exited = 'Yes' THEN 1 ELSE 0 END) * 100, 2) AS ChurnRate
+FROM customers
+GROUP BY NumOfProducts;
 
 SELECT tenure
 FROM customers
