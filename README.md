@@ -150,6 +150,9 @@ The dataset did not explicitly define 0/1 values. Through analysis, we determine
  **Finding:**
 - **Inactive members churn at 27%,** compared to **14% churn among active members.**
 
+![Main Dashboard](Resources/screenshots/Activity%20SQL.png)
+
+
  **Recommendation:**
 - Implement **engagement strategies** like rewards for activity.
 
@@ -157,10 +160,13 @@ The dataset did not explicitly define 0/1 values. Through analysis, we determine
  **Finding:**
 - Customers with **credit scores below 500** have a churn rate of **23.73%**.
 
+![Main Dashboard](Resources/screenshots/credit%20score%20SQL.png)
+
+
  **Recommendation:**
 - Provide **financial advisory services** to lower-credit-score customers.
 
-### **F. Churn by Balance & Products Held**
+### **F. Additional Findings**
  **Finding:**
 - Customers with **zero balance churn at 13.82%**.
 - Customers with **two products churn the least (8%)**.
