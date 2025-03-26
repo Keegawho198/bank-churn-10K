@@ -167,10 +167,15 @@ The dataset did not explicitly define 0/1 values. Through analysis, we determine
 
 ## **Business Recommendations**
  **Retention Strategy**: Focus on **middle-aged customers** and those with **one product**.
+
  **Customer Engagement**: Address **inactive members** with personalized offers.
+
  **Regional Targeting**: Conduct investigations into **Germany’s high churn rate**.
+
  **Financial Advisory**: Assist customers with **lower credit scores**.
+
  **Product Strategy**: Promote multi-product usage **without overwhelming customers**.
+
 - **Retention Strategy**: Focus on **40-50 age group** and customers with **one product**
 - **Customer Engagement**: Address complaints promptly to reduce churn
 - **Geographic Targeting**: Special campaigns for France & Germany
