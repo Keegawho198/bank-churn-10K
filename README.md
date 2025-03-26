@@ -120,47 +120,47 @@ The dataset did not explicitly define 0/1 values. Through analysis, we determine
 ## **Key Findings from SQL & Tableau Analysis**
 
 ### **A. Overall Churn Rate**
-📌 **Finding:**
+ **Finding:**
 - **20.38% of customers (2,038) left the bank.**
 
 ### **B. Churn by Geography**
-📌 **Finding:**
+ **Finding:**
 - Germany has the **highest churn rate** at **32.4%**.
 - France, despite a lower churn rate, had a similar number of churned customers due to a larger customer base.
 
-📌 **Recommendation:**
+ **Recommendation:**
 - Investigate customer complaints and retention strategies in Germany.
 - Address churn factors beyond just regional differences.
 
 ### **C. Impact of Age on Churn**
-📌 **Finding:**
+ **Finding:**
 - **Customers aged 35-45 churn the most.**
 - Older customers (50+) show **higher loyalty**.
 
-📌 **Recommendation:**
+ **Recommendation:**
 - Develop **loyalty programs** for middle-aged customers.
 
 ### **D. Customer Activity & Churn**
-📌 **Finding:**
+ **Finding:**
 - **Inactive members churn at 27%,** compared to **14% churn among active members.**
 
-📌 **Recommendation:**
+ **Recommendation:**
 - Implement **engagement strategies** like rewards for activity.
 
 ### **E. Churn by Credit Score**
-📌 **Finding:**
+ **Finding:**
 - Customers with **credit scores below 500** have a churn rate of **23.73%**.
 
-📌 **Recommendation:**
+ **Recommendation:**
 - Provide **financial advisory services** to lower-credit-score customers.
 
 ### **F. Churn by Balance & Products Held**
-📌 **Finding:**
+ **Finding:**
 - Customers with **zero balance churn at 13.82%**.
 - Customers with **two products churn the least (8%)**.
 - Customers with **3+ products experience high churn (83-100%)**.
 
-📌 **Recommendation:**
+ **Recommendation:**
 - Encourage **multi-product usage**, but avoid aggressive cross-selling.
 
 ---
