@@ -6,6 +6,8 @@
 
 ![Main Dashboard](Resources/screenshots/Main%20Dashboard.png)
 
+Tableau Link -> https://public.tableau.com/app/profile/keegan.nair/viz/BankchurnTableau/MainDashboard
+
 ### Project Overview
 This project aims to analyze customer churn using:
 - **Python** for data cleaning and preprocessing
