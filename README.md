@@ -123,10 +123,16 @@ The dataset did not explicitly define 0/1 values. Through analysis, we determine
  **Finding:**
 - **20.38% of customers (2,038) left the bank.**
 
+![Main Dashboard](Resources/screenshots/Geograpgy%20SQL.png)
+
+
 ### **B. Churn by Geography**
  **Finding:**
 - Germany has the **highest churn rate** at **32.4%**.
 - France, despite a lower churn rate, had a similar number of churned customers due to a larger customer base.
+
+![Main Dashboard](Resources/screenshots/Geograpgy%20SQL.png)
+
 
  **Recommendation:**
 - Investigate customer complaints and retention strategies in Germany.
