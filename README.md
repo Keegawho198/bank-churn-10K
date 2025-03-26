@@ -140,8 +140,11 @@ The dataset did not explicitly define 0/1 values. Through analysis, we determine
 
 ### **C. Impact of Age on Churn**
  **Finding:**
-- **Customers aged 35-45 churn the most.**
+- **Customers aged 40-50 churn the most.**
 - Older customers (50+) show **higher loyalty**.
+
+![Main Dashboard](Resources/screenshots/age%20graph.png)
+
 
  **Recommendation:**
 - Develop **loyalty programs** for middle-aged customers.
@@ -188,15 +191,16 @@ The dataset did not explicitly define 0/1 values. Through analysis, we determine
 
  **Product Strategy**: Promote multi-product usage **without overwhelming customers**.
 
+**Additional Strategies**
 - **Retention Strategy**: Focus on **40-50 age group** and customers with **one product**
-- **Customer Engagement**: Address complaints promptly to reduce churn
+- **Customer Engagement**: Address complaints promptly to reduce churn AND Encourage customers with only one product to adopt a second, as those with two products show the lowest churn rates.
 - **Geographic Targeting**: Special campaigns for France & Germany
 - **Credit Score Consideration**: Identify at-risk customers with moderate credit scores
 
 
 
 ## **Next Steps**
-**Future Improvements:**
+**Future Improvements**
 - **Explore external factors** (economic trends, competitor offerings).
 - **Apply machine learning** to predict churn before it happens.
 - **Enhance customer segmentation** to refine retention strategies.
